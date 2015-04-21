@@ -22,8 +22,8 @@ include 'header.php';
 		$total = 0;
 		$shipping = 5.99;
 		echo"<div class='title'><h3>Your cart contains the following items:</h3></div>";
-		echo "<div class='title'><table style='width:100%'><td>Product Name:</td><td>Category:</td><td>
-		Price Per:</td><td>Quantity Ordered:</td><td>Total Item Cost:</td></tr>";
+		echo "<div class='title'><table style='width:100%'><tr><td><b>Product Name:</b></td><td><b>Category:</b></td><td>
+		<b>Price Per:</b></td><td><b>Quantity Ordered:</b></td><td><b>Total Item Cost:</b></td></tr>";
 		foreach ($array as $key => $value) {
 			$sql = "SELECT ProductName, CategoryID, UnitPrice, UnitsInStock FROM products WHERE ProductID = '$key'";
 			$results = mysqli_query($link, $sql);
@@ -32,8 +32,9 @@ include 'header.php';
 			if(mysqli_num_rows($results) > 0){
 				list($name, $cat, $price, $inStock) = mysqli_fetch_array($results);
 				$category = array(1=>"Electrionics",2=>"Auto", 3=>"Cosmetics");
-				$total += $value * $price;
-				echo "<tr><td>$name</td><td>$category[$cat]</td><td>\$$price</td><td>$value</td><td>\$$total</td>";
+				$lineValue = $value * $price;
+				$total += $lineValue;
+				echo "<tr><td>$name</td><td>$category[$cat]</td><td>\$$price</td><td>$value</td><td>\$$lineValue</td>";
 			}
 			
 		}
