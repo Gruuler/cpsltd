@@ -1,4 +1,3 @@
-<!doctype html>
 <html>
 <?php
 
@@ -85,8 +84,39 @@ var createDiv = function(pId,name,description,price,picture) {
   return div;
 }
 
+var search = function() {
+  if($('search').value != "") {
+    $('productList').removeChild($('products'));
+    var url = "filterProducts.php?term=" + $('search').value;
+    if($('sCat') > 0) {
+      url = url + "&catId=" + $('sCat');
+    }
+    var xmlHttp = createXMLHttp();
+    xmlHttp.open("GET",url);
+    xmlHttp.send();
+    var results = "";
+    xmlHttp.onreadystatechange = function() {
+      if(xmlHttp.readyState == 4) {
+        var rows = JSON.parse(xmlHttp.responseText); 
+        var products = document.createElement("div");
+        products.setAttribute("id","products");
+        for(i=0; i<rows.length; i++) {
+          var temp = createDiv(rows[i]["pId"],rows[i]["name"],rows[i]["description"],rows[i]["price"],rows[i]["picture"]);
+          products.appendChild(temp);
+        }
+        $("productList").appendChild(products);
+      }
+    }
+  }else{
+    $('productList').removeChild($('products'));
+    callProducts();
+  }
+}
+
 window.onload = function() {
 	callProducts();
+  $('bSearch').onclick = search;
+  $('sCat').onchange = search;
 }
 
 </script>
@@ -100,6 +130,7 @@ window.onload = function() {
 				<form>
 					Search In Products:<br>
 					<input type="text" name="search" id="search">
+          <input type="button" value="Search" id="bSearch">
 				</form>
 			</div><br>
 			<div class = "search">
@@ -114,11 +145,7 @@ window.onload = function() {
 						<option value=3>Cosmetics</option>
 					</select><br>
 					<br>
-					Price:<br>
-					$0-10  <input type="radio" name="price" value=1><br>
-					$11-50 <input type="radio" name="price" value=2><br>
-					$51-100 <input type="radio" name="price" value=3><br>
-					>$101 <input type="radio" name="price" value=4><br>
+					
 				</div>
 				</form>
 			</div>
