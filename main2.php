@@ -4,7 +4,9 @@ $title = 'main2';
 include_once 'header.php';
 ?>
 Welcome to CPS LTD
-echo "<a href=\"logout.php\">Logout</a><br>";
+<?php
+echo "<a href=\"main2.php\">main2</a><br>";
+?>
 
 CPS Ltd. is the electronic commerce company with headquarters based in Salt Lake City, UT. The company offers wide variety of products ranging from electronic gadgets to cosmetics.  
 It was founded by three college students, Chris, Pamela and Saud. The primary focus of these three students was to offer good quality products to the customers at their convenience.  
