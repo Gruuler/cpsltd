@@ -5,7 +5,7 @@ include_once 'header.php';
 ?>
 Welcome to CPS LTD
 <?php
-echo "<a href=\"main2.php\">main2</a><br>";
+echo "<a href=\"main2.php\"><img src='images/$image'><br>$name</a><br>";
 ?>
 
 CPS Ltd. is the electronic commerce company with headquarters based in Salt Lake City, UT. The company offers wide variety of products ranging from electronic gadgets to cosmetics.  
