@@ -35,7 +35,7 @@ window.onload = function() {
 
     <div class="col-md-8">
       <div class="menu">
-       <ul class="pull-left">
+       <div class="pull-left">
         <div class="cart" id="cart">
           <?php
             if(!isset($_COOKIE['cart'])) {
@@ -53,7 +53,7 @@ window.onload = function() {
             echo "<a href='cart.php'>You have " . $numProducts . " item(s) in your cart";
             ?>
         </div>
-       </ul>
+       </div>
        <ul class="pull-right">
         <?php
          $pages = array("Main" => "main.php","Products" => "products.php");
@@ -72,12 +72,10 @@ window.onload = function() {
        </ul>
       </div>
     </div>
-
+   
     <div class="col-md-2">
     </div>
-
   </div>
-</div>
 
 <!-- Body -->
 

@@ -26,7 +26,9 @@ var $ = function(x) {
 
 
 var callProducts = function() {
-  var url = "filterProducts.php"; 
+  var url = "filterProducts.php";
+  var products = document.createElement("div");
+  products.setAttribute("id","products"); 
   var xmlHttp = createXMLHttp();
   xmlHttp.open("GET",url);
   xmlHttp.send();
@@ -34,16 +36,13 @@ var callProducts = function() {
   xmlHttp.onreadystatechange = function() {
     if(xmlHttp.readyState == 4) {
       var rows = JSON.parse(xmlHttp.responseText); 
-      var products = document.createElement("div");
-      products.setAttribute("id","products");
       for(i=0; i<rows.length; i++) {
         var temp = createDiv(rows[i]["pId"],rows[i]["name"],rows[i]["description"],rows[i]["price"],rows[i]["picture"]);
         products.appendChild(temp);
       }
-      $("productList").appendChild(products);
     }
-
   }
+  $("productList").appendChild(products);
 }
 
 var createDiv = function(pId,name,description,price,picture) {
@@ -122,6 +121,19 @@ window.onload = function() {
 </script>
 
 <div class="title"><h2>Products</h2></div>
+<div class="title">
+  <?php
+    if(isset($_GET['update'])){
+      if($_GET['update']){
+        echo "<br>";
+        echo "<b >Your item has been added to your cart!</b>";
+      }else{
+        echo"There was a problem adding your item.  Please try again later.";
+      }
+
+    }
+  ?>
+</div>
 
 <div class = "product-center">
 	<div class = "inline">

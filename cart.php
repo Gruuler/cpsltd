@@ -5,6 +5,28 @@ include 'header.php';
 
 ?>
 
+<script type="text/javascript">
+
+var $ = function(x) {
+  return document.getElementById(x);
+}
+
+var reset = function(){
+	var cart = new Array();
+	var d = new Date();
+	d.setTime(d.getTime() + (1000*60*60*24*5));
+	var expires = "expires="+d.toUTCString();
+	var sCart = "cart=";
+	document.cookie=sCart + ";" + expires;
+	location.reload(true);
+}
+
+window.onload = function(){
+	$('reset').onclick = reset;
+}
+
+</script>
+
 <div class='title'>
 	<h2>Shopping Cart</h2>
 </div>
@@ -43,11 +65,21 @@ include 'header.php';
 		$total += $shipping; 
 		echo"<tr><td></td><td></td><td></td><td>Total Price:</td><td>\$$total</td></tr>";
 		echo "</table></div>";
+		echo"
+		<div class = 'title'>
+			<form>
+			<input type='button' value='Empty Cart' id='reset'>
+			</form>
+		</div>
+		";
 	}
 
 echo "</div>";
+?>
 
 
+
+<?php
 include 'footer.php';
 ?>
 </html>

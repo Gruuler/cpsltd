@@ -10,7 +10,7 @@
 	echo (!$results?die(mysqli_error($link)."<br>".$sql):"");
 
 	$count = mysqli_num_rows($results);
-
+	$rows = array();
 	for($i=0;$i<$count;$i++) {
 		list($pId,$name,$description,$price,$picture) = mysqli_fetch_array($results);
 		$rows[$i]["pId"] = $pId;
